@@ -34,6 +34,7 @@ enum CONFIG_INDEX {
 #define CONFIG_ITEM_ALTSTARTUP   "$AltStartup"
 #define CONFIG_ITEM_VMC          "$VMC"
 #define CONFIG_ITEM_COMPAT       "$Compatibility"
+#define CONFIG_ITEM_TITLE "Title"
 //START of OPL_DB tweaks
 #define CONFIG_ITEM_MODES        "Modes"
 //END of OPL_DB tweaks
