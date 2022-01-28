@@ -647,7 +647,19 @@ static void updateMenuFromGameList(opl_io_module_t *mdl)
 
             gup->submenu.icon_id = -1;
             gup->submenu.id = i;
-            gup->submenu.text = mdl->support->itemGetName(i);
+            //read game config file from smb to be enable to display UTF8 game title display in gamelist
+            char path[256];
+            snprintf(path, sizeof(path), "%s"OPL_FOLDER"%s%s.cfg", ethGetPrefix(), "\\", mdl->support->itemGetStartup(i));
+            config_set_t *config = configAlloc(0, NULL, path);
+            configRead(config);
+
+            //try to get title from game config file, else display name from file name
+            const char *title;
+            if (configGetStr(config, CONFIG_ITEM_TITLE, &title) != 0)
+              gup->submenu.text = title;
+            else
+              gup->submenu.text = mdl->support->itemGetName(i);
+
             gup->submenu.text_id = -1;
             gup->submenu.selected = 0;
 
